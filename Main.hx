@@ -5,17 +5,19 @@ import sys.io.File;
 using StringTools;
 using haxe.io.Path;
 
-function usage(?msg:String, code=1) {
+function exit(?msg:String, code=1) {
     if(msg != null) Sys.stderr().writeString('$msg\n');
-    Sys.stdout().writeString("Usage: msgpack <file.json|file.msgpack>\n");
     Sys.exit(1);
 }
+
+inline function usage(?msg:String, code=1)
+    exit("Usage: msgpack <file.json|file.msgpack>\n",1);
 
 function main() {
     var args = Sys.args();
     if(args.length != 1)
         usage();
-    var file = args[0].trim();
+    final file = args[0].trim();
     switch file {
     case "--help","-h": usage();
     case _:
